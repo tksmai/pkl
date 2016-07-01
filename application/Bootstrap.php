@@ -19,6 +19,8 @@ class Bootstrap extends Yaf_Bootstrap_Abstract{
 		//注册一个插件
 		$objSamplePlugin = new SamplePlugin();
 		$dispatcher->registerPlugin($objSamplePlugin);
+		// 全局禁用视图的自动渲染
+		$dispatcher->autoRender(FALSE);
 	}
 
 	public function _initRoute(Yaf_Dispatcher $dispatcher) {
