@@ -1,7 +1,7 @@
 <?php
-namespace Db;
+namespace db;
 use PDO;
-abstract class Driver{
+class driver{
 	private $_pdo;
 	public function query()
 	{

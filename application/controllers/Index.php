@@ -29,6 +29,9 @@ class IndexController extends Yaf_Controller_Abstract {
 
 	public function testAction()
 	{
-		
+		$db = new \db\driver();
+		var_dump($db);
+		$db->query();
+		// return false;
 	}
 }
