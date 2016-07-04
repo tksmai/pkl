@@ -8,21 +8,36 @@
  * 调用的次序, 和申明的次序相同
  */
 class Bootstrap extends Yaf_Bootstrap_Abstract{
-
+	private $_app_config;
+	public function _init(Yaf_Dispatcher $dispatcher){
+		\Yaf_Session::getInstance()->start();
+	}
     public function _initConfig() {
 		//把配置保存起来
 		$arrConfig = Yaf_Application::app()->getConfig();
 		Yaf_Registry::set('config', $arrConfig);
+		$this->_app_config = $arrConfig->toArray();
 	}
 
 	public function _initPlugin(Yaf_Dispatcher $dispatcher) {
 		//注册一个插件
-		$objSamplePlugin = new SamplePlugin();
-		$dispatcher->registerPlugin($objSamplePlugin);
+		// $objSamplePlugin = new SamplePlugin();
+		// $dispatcher->registerPlugin($objSamplePlugin);
 		// 全局禁用视图的自动渲染
 		$dispatcher->autoRender(FALSE);
 	}
-
+	public function _initService(Yaf_Dispatcher $dispatcher){
+		// 注册服务
+		$service = \service::getInstance();
+		$service->register('dbo', function(){
+			$db_config = $this->_app_config['db'];
+			$db_config['option'] = [
+				\PDO::ATTR_CASE => \PDO::CASE_NATURAL,
+			];
+			return new \db\medoo($db_config);
+		});
+				
+	}
 	public function _initRoute(Yaf_Dispatcher $dispatcher) {
 		//在这里注册自己的路由协议,默认使用简单路由
 	}
