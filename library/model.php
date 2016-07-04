@@ -1,5 +1,5 @@
 <?php
-abstract class Model{
+class model{
 	protected $db;
 	protected $table_name;
 	protected $table_prefix;
@@ -8,19 +8,27 @@ abstract class Model{
 	public function __construct(string $name = null){
 		if ( $name ) {
 			$this->name = $name;
+			$this->table_name = $name;
 		} else {
 			$this->getModelName();
 		}
 
 		if ( $this->name ) {
-			$this->db = \sevice::getInstance()->fetch('db');
+			$this->db = \service::getInstance()->fetch('dbo');
 			$this->table_prefix = Yaf_Application::app()->getConfig()->db->prefix;
 		}
 	}
 	public function select(array $option)
 	{
 		$this->formatTable($option);
-		return $this->db->select($this->table_fullname, $option['join'], $option['columns'], $option['where']);
+		if ( $option['join'] ) {
+			return $this->db->select($this->table_fullname, $option['join'], $option['columns'], $option['where']);
+		}
+		return $this->db->select($this->table_fullname, $option['columns'], $option['where']);		
+	}
+	public function last_query()
+	{
+		return $this->db->last_query();
 	}
 	private function formatTable(array $option){
 		isset($option['table_name']) && $this->table_name = $option['table_name'];

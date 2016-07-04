@@ -11,8 +11,10 @@ class Bootstrap extends Yaf_Bootstrap_Abstract{
 	private $_app_config;
 	public function _init(Yaf_Dispatcher $dispatcher){
 		\Yaf_Session::getInstance()->start();
+		// 全局禁用视图的自动渲染
+		$dispatcher->autoRender(FALSE);
 	}
-    public function _initConfig() {
+    public function _initConfig(Yaf_Dispatcher $dispatcher) {
 		//把配置保存起来
 		$arrConfig = Yaf_Application::app()->getConfig();
 		Yaf_Registry::set('config', $arrConfig);
@@ -21,10 +23,8 @@ class Bootstrap extends Yaf_Bootstrap_Abstract{
 
 	public function _initPlugin(Yaf_Dispatcher $dispatcher) {
 		//注册一个插件
-		// $objSamplePlugin = new SamplePlugin();
-		// $dispatcher->registerPlugin($objSamplePlugin);
-		// 全局禁用视图的自动渲染
-		$dispatcher->autoRender(FALSE);
+		$objSamplePlugin = new SamplePlugin();
+		$dispatcher->registerPlugin($objSamplePlugin);
 	}
 	public function _initService(Yaf_Dispatcher $dispatcher){
 		// 注册服务

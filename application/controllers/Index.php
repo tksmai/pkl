@@ -5,7 +5,7 @@
  * @desc 默认控制器
  * @see http://www.php.net/manual/en/class.yaf-controller-abstract.php
  */
-class IndexController extends Yaf_Controller_Abstract {
+class IndexController extends AdminController {
 
 	/** 
      * 默认动作
@@ -17,21 +17,20 @@ class IndexController extends Yaf_Controller_Abstract {
 		$get = $this->getRequest()->getQuery("get", "default value");
 
 		//2. fetch model
-		$model = new SampleModel();
+		// $model = new SampleModel();
 
 		//3. assign
-		$this->getView()->assign("content", $model->selectSample());
+		// $this->getView()->assign("content", $model->selectSample());
 		$this->getView()->assign("name", $name);
-
+		echo $name;
 		//4. render by Yaf, 如果这里返回FALSE, Yaf将不会调用自动视图引擎Render模板
-        return TRUE;
+        // return TRUE;
 	}
 
 	public function testAction()
 	{
-		$db = new \db\driver();
-		var_dump($db);
-		$db->query();
+		$model = new \model();
+		
 		// return false;
 	}
 }
