@@ -16,6 +16,9 @@ abstract class AdminController extends Yaf_Controller_Abstract {
 			'where' => [
 				'ORDER' => [
 					'sort' => 'DESC',
+				],
+				'AND' => [
+					'status' => '1',
 				]
 			]
 		];

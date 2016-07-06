@@ -6,7 +6,7 @@
                 <a href="" ng-click="check(key)"><i class="fa fa-navicon fa-fw"></i> {{group.title}}<span ng-if="group.node_list" class="fa arrow"></span></a>
                 <ul class="nav nav-second-level" collapse="collapseVar!=key" ng-if="group.node_list">
                     <li ui-sref-active="active" ng-repeat="node in group.node_list">
-                        <a ui-sref="dashboard.custom">{{node.title}}</a>
+                        <a ui-sref="admin.{{node.name}}">{{node.title}}</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
