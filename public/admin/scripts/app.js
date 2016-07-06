@@ -1,4 +1,3 @@
-'use strict';
 /**
  * @ngdoc overview
  * @name sbAdminApp
@@ -7,6 +6,7 @@
  *
  * Main module of the application.
  */
+// window.localStorage.sbAdminSession = ''; // 保存session id
 angular
   .module('sbAdminApp', [
     'oc.lazyLoad',
@@ -155,7 +155,18 @@ angular
    })
       .state('dashboard.custom', {
       templateUrl:'views/custom.html',
+      controller:'CustomPage',
       url:'/custom',
+      resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:[
+              'scripts/controllers/customContoller.js'
+              ]
+            })
+          }
+        }
    })
   }]);
 

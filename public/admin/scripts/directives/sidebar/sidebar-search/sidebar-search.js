@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc directive
  * @name izzyposWebApp.directive:adminPosHeader
@@ -17,6 +15,7 @@ angular.module('sbAdminApp')
       },
       controller:function($scope){
         $scope.selectedMenu = 'home';
+        $scope.searchTips = '搜索功能页';
       }
     }
   });

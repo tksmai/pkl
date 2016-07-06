@@ -7,12 +7,16 @@
  * # adminPosHeader
  */
 angular.module('sbAdminApp')
-	.directive('header',function(){
+	.directive('header', function(){
 		return {
-        templateUrl:'scripts/directives/header/header.html',
-        restrict: 'E',
-        replace: true,
+	        templateUrl:'scripts/directives/header/header.html',
+	        restrict: 'E',
+	        replace: true,
+	        scope:{},
+	        controller: function($scope){
+	    		$scope.adminTitle = '傻逼后台 版本2.0';
+	    	}
     	}
-	});
+    });
 
 
