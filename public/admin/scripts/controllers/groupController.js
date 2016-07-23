@@ -4,7 +4,7 @@ angular.module('sbAdminApp')
   	$scope.page_title = '分组管理';
 	$scope.list_data = [];
 	var _httpdata = {
-		url:'http://vincentmai.f3322.org/pkl/public/Group/index',
+		url:'/Group/index',
 		method:'get',
 		timeout:10000,
 		responseType:"json",
