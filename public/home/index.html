@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>DEMO - PKL</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+		<script type="text/javascript" src="js/LAB.js"></script>
+		<script type="text/javascript">
+			$LAB
+				.script("bower_components/jquery/dist/jquery.min.js")
+				.script("js/bootstrap.min.js");
+		</script>
+		<style type="text/css">
+			body{
+				background: #FFF url("img/bg.jpg") repeat fixed 0 0;
+			}
+			.tks-navbar{
+				padding: 0px;
+				border: 0px;
+				background: rgba(238,238,238,0.5) !important;
+				box-shadow: rgba(0,0,0,0.1) 0 1px 2px;
+				border-radius: 0px !important;
+			}
+			.tks-navigation{
+				background: rgba(238,238,238,0.5) !important;
+				height: 100%;
+				width: 100%;
+				position: relative;
+			}
+			.tks-navigation-top{
+				-webkit-filter: blur(5px);
+				-ms-filter: blur(5px);
+				filter:blur(5px);
+				position: absolute;
+				width: 100%;
+				height: 50px;
+				z-index: 1;
+				/*background: rgba(39,39,39,0.5) !important;*/
+				background: #FFF url("img/bg.jpg") repeat fixed 0 0;
+				overflow: visible;
+			}
+			.tks-navigation-bottom{
+				/*background: rgba(39,39,39,0.5) !important;*/
+			}
+			.tks-navigation-content{
+				position: relative;
+				z-index: 2;
+			}
+			#main,#sub{
+				background: rgba(238,238,238,0.3);
+				box-shadow: rgba(0,0,0,0.1) 0 1px 2px;
+				/*-webkit-filter: blur(5px);
+				-ms-filter: blur(5px);
+				filter:blur(5px);*/
+			}
+		</style>
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse tks-navbar">
+			<div class="tks-navigation">
+				<div class="tks-navigation-top"></div>
+				<div class="tks-navigation-bottom"></div>
+			</div>
+			<div class="container tks-navigation-content">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-menu" aria-expanded="false">
+						<span class="sr-only">Toggle</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/">HOME</a>
+					<a class="navbar-brand navbar-item" href="/i/reguster">Sign Up</a>
+				</div>
+				<div class="navbar-collapse collapse"></div>
+			</div>
+		</nav>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8" id="main">
+					<div style="height:1000px;display:block;">ABC</div>
+				</div>
+				<div class="col-md-4" id="main">
+					<div style="height:800px;display:block;">DEF</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
