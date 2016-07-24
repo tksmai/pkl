@@ -27,6 +27,7 @@ angular
 			.state('admin', {
 				url:'/admin',
 				templateUrl: 'views/admin/main.html',
+				controller: 'Auth', // 打算将登陆验证的controller放这里
 				resolve: {
 						loadMyDirectives:function($ocLazyLoad){
 								return $ocLazyLoad.load(
@@ -36,7 +37,8 @@ angular
 										'scripts/directives/header/header.js',
 										'scripts/directives/header/header-notification/header-notification.js',
 										'scripts/directives/sidebar/sidebar.js',
-										'scripts/directives/sidebar/sidebar-search/sidebar-search.js'
+										'scripts/directives/sidebar/sidebar-search/sidebar-search.js',
+										'scripts/controllers/authController.js'
 										]
 								}),
 								$ocLazyLoad.load(

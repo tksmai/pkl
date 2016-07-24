@@ -20,7 +20,7 @@ angular.module('sbAdminApp')
 				var _httpdata = {
 					// url:'http://vincentmai.f3322.org/pkl/public/Index/fetchNode',
 					// url:'http://pkl.0n0.win/Index/fetchNode',
-					url:'/Index/fetchNode',
+					url:'/index.php/Index/fetchNode',
 					method:'get',
 					timeout:10000,
 					responseType:"json"
