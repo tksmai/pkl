@@ -2,10 +2,8 @@
 /**
  * @name rest
  * @author Tsukasa Yukinoshita
- * @desc 默认控制器
- * @see http://www.php.net/manual/en/class.yaf-controller-abstract.php
  */
-class rest extends Yaf_Controller_Abstract {
+abstract class Rest extends Yaf_Controller_Abstract {
 	protected $_post_data;
 	public function init()
 	{
@@ -14,16 +12,16 @@ class rest extends Yaf_Controller_Abstract {
 
 	protected function respone(array $data, int $http_code = null, array $option = null)
 	{
-		$json_option = (int)$option['json_option'] ?? 0;
-		$json_depth = (int)$option['json_depth'] ?? 512;
+		// @$json_option = (int)$option['json_option'] ?? 0;
+		// @$json_depth = (int)$option['json_depth'] ?? 512;
 		$http_code = $http_code ?? 200;
-		dump($http_code);exit();
 		$status_text = (string)$option['status_text'] ?? null;
 		header('Content-Type:application/json; charset=utf-8');
-		$this->sendHttpStatus($http_code, $status_text)
-		exit(json_encode($data, $json_option, $json_depth));
+		$this->sendHttpStatus($http_code, $status_text);
+		// exit(json_encode($data, $json_option, $json_depth));
+		exit(json_encode($data));
 	}
-	protected function sendHttpStatus(int $code, string $custom_text == null) {
+	protected function sendHttpStatus(int $code, string $custom_text = null) {
 		static $_status = array(
 			// Informational 1xx
 			100 => 'Continue',

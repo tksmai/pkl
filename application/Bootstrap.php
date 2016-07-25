@@ -28,13 +28,13 @@ class Bootstrap extends Yaf_Bootstrap_Abstract{
 	}
 	public function _initService(Yaf_Dispatcher $dispatcher){
 		// 注册服务
-		$service = \service::getInstance();
+		$service = \Service::getInstance();
 		$service->register('dbo', function(){
 			$db_config = $this->_app_config['db'];
 			$db_config['option'] = [
 				\PDO::ATTR_CASE => \PDO::CASE_NATURAL,
 			];
-			return new \db\medoo($db_config);
+			return new \Db\Medoo($db_config);
 		});
 				
 	}

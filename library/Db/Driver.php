@@ -1,6 +1,6 @@
 <?php
-namespace db;
-class driver{
+namespace Db;
+class Driver{
 	private static $_dbo;
 	public static function getInstance(array $db_config)
 	{

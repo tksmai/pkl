@@ -2,7 +2,7 @@
 /**
  * 服务类，需要在Bootstrap注册服务组件
  */
-class service{
+class Service{
 	protected $_components; // 组件实例
 	protected $_definitions; // 组件定义
 	protected static $instance;

@@ -7,9 +7,9 @@
  * Copyright 2016, Angel Lai
  * Released under the MIT license
  */
-namespace db;
+namespace Db;
 use \PDO;
-class medoo
+class Medoo
 {
 	// General
 	protected $database_type;
