@@ -13,12 +13,12 @@ angular.module('sbAdminApp')
 				}
 			}
 			$http(_httpdata).then(function successCallback(response){
-				if (response.status != 200){
-					redirectLogin();
-				}
+				console.log('success');
 			}, function errorCallback(response){
-				// console.log('error request');
-				// console.log(response);
+				if(response.status != 401) {
+					console.log(response.statusText);
+				}
+				redirectLogin();
 			});
 		} else {
 			redirectLogin();
