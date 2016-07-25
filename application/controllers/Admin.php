@@ -52,19 +52,18 @@ class AdminController extends Yaf_Controller_Abstract {
 
 	public function sessionAction()
 	{
-		dump('ok');
 		$request_method = strtolower($_SERVER['REQUEST_METHOD']);
 		$fun = "{$request_method}_session";
 		if (method_exists($this, $fun)) {
 			call_user_func([$this, $fun]);
 		} else {
-			$this->respone([], ['http_code' => 404]);
+			$this->respone([], 403, ['status_text' => 'action not Allowed']);
 		}
 	}
 
 	protected function get_session()
 	{
-		$this->respone($_REQUEST, 401);
+		$this->respone($_REQUEST, 200);
 	}
 
 	protected function dataTransfer(array $org_data, bool $is_page, $err_msg = null)
@@ -98,19 +97,18 @@ class AdminController extends Yaf_Controller_Abstract {
 		], 0);
 	}
 
-	protected function respone(array $data, int $http_code = null, array $option = null)
+	protected function respone($data, int $http_code = null, array $option = null)
 	{
-		$json_option = (int)$option['json_option'] ?? 0;
-		$json_depth = (int)$option['json_depth'] ?? 512;
+		// @$json_option = (int)$option['json_option'] ?? 0;
+		// @$json_depth = (int)$option['json_depth'] ?? 512;
 		$http_code = $http_code ?? 200;
-		dump($http_code);exit();
 		$status_text = (string)$option['status_text'] ?? null;
 		header('Content-Type:application/json; charset=utf-8');
-		$this->sendHttpStatus($http_code, $status_text)
-		exit(json_encode($data, $json_option, $json_depth));
+		$this->sendHttpStatus($http_code, $status_text);
+		exit(json_encode($data));
 	}
-	protected function sendHttpStatus(int $code, string $custom_text == null) {
-		static $_status = array(
+	protected function sendHttpStatus(int $code, string $custom_text = null) {
+		$_status = array(
 			// Informational 1xx
 			100 => 'Continue',
 			101 => 'Switching Protocols',
