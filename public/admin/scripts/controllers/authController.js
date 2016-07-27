@@ -1,6 +1,8 @@
 angular.module('sbAdminApp')
 	.controller('Auth',['$scope', '$http', '$state', function($scope, $http, $state){
-		var sbAdminToken = window.localStorage.sbAdminToken;
+		var redirectLogin = function(){
+			$state.go('login');
+		};
 		if (sbAdminToken) {
 			var _httpdata = {
 				url:'/index.php/Admin/session',
@@ -22,9 +24,16 @@ angular.module('sbAdminApp')
 			});
 		} else {
 			redirectLogin();
+		}	
+	}]);
+angular.module('sbAdminApp')
+	.controller('Login',['$scope', '$http', '$state', function($scope, $http, $state){
+		$scope.form = {
+			account:"",
+			password:""
 		}
-		var redirectLogin = function(){
-			$state.go('login');
-		};
+		$scope.loginAction = function($event){
+			console.log($scope.form);
+		}
 		
 	}]);

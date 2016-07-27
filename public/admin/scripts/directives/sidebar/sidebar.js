@@ -18,20 +18,17 @@ angular.module('sbAdminApp')
 				$scope.collapseVar = 0;
 				$scope.multiCollapseVar = 0;
 				var _httpdata = {
-					// url:'http://vincentmai.f3322.org/pkl/public/Index/fetchNode',
-					// url:'http://pkl.0n0.win/Index/fetchNode',
 					url:'/index.php/Index/fetchNode',
 					method:'get',
 					timeout:10000,
 					responseType:"json"
-					// params:{
-					// 	'device_id':'1',
-					// 	'token':'2'
-					// }
+					params:{
+						'device_id':'1',
+						'token': sbAdminToken
+					}
 				}
 				$scope.menuList = [];
 				$http(_httpdata).success(function(rpdata){
-					console.log(rpdata);
 					if (rpdata.status = 1){
 						$scope.menuList = rpdata.data;
 					}

@@ -6,7 +6,7 @@
  *
  * Main module of the application.
  */
-// window.localStorage.sbAdminSession = ''; // 保存session id
+var sbAdminToken = window.localStorage.sbAdminToken;
 angular
 	.module('sbAdminApp', [
 		'oc.lazyLoad',
@@ -105,7 +105,16 @@ angular
 		})
 			.state('login',{
 				templateUrl:'views/pages/login.html',
-				url:'/login'
+				url:'/login',
+				controller:'Login',
+				resolve:{
+					loadMyFile:function($ocLazyLoad){
+						return $ocLazyLoad.load({
+							name:'sbAdminApp',
+							files:['scripts/controllers/authController.js']
+						})
+					}
+				}
 		})
 			.state('admin.chart',{
 				templateUrl:'views/chart.html',
