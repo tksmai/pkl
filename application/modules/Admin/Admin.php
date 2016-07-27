@@ -63,7 +63,7 @@ class AdminController extends Yaf_Controller_Abstract {
 
 	protected function get_session()
 	{
-		$this->respone($_REQUEST, 200);
+		$this->respone($_REQUEST, 401);
 	}
 
 	protected function dataTransfer(array $org_data, bool $is_page, $err_msg = null)
