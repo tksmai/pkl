@@ -1,5 +1,5 @@
 <?php
-class model{
+class Model{
 	protected $db;
 	protected $table_name;
 	protected $table_prefix;
