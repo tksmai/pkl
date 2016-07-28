@@ -4,22 +4,24 @@ class Model{
 	protected $table_name;
 	protected $table_prefix;
 	protected $table_fullname;
-	protected $name;
+	// protected $name;
 	public function __construct(string $name = null){
 		if ( $name ) {
-			$this->name = $name;
 			$this->table_name = $name;
 		} else {
-			$this->getModelName();
+			$this->table_name = $this->getModelName();
 		}
-
-		if ( $this->name ) {
+		// $this->table_name = 
+		if ( $this->table_name ) {
 			$this->db = \Service::getInstance()->fetch('dbo');
 			$this->table_prefix = Yaf_Application::app()->getConfig()->db->prefix;
 		}
+		$this->table_fullname = "{$this->table_prefix}{$this->table_name}";
 	}
 	public function select(array $option)
 	{
+		@!$option['join'] && $option['join'] = [];
+		@!$option['columns'] && $option['columns'] = '*';
 		$this->formatTable($option);
 		if ( $option['join'] ) {
 			return $this->db->select($this->table_fullname, $option['join'], $option['columns'], $option['where']);
@@ -40,15 +42,11 @@ class Model{
 		}
 	}
 	private function getModelName() {
-		if(empty($this->name)){
-			$name = substr(get_class($this), 0, -strlen('Model'));
-			if ( $pos = strrpos($name,'\\') ) {//有命名空间
-				$this->name = substr($name, $pos+1);
-			}else{
-				$this->name = $name;
-			}
+		$name = substr(get_class($this), 0, -strlen('Model'));
+		if ( $pos = strrpos($name,'\\') ) {//有命名空间
+			$name = substr($name, $pos+1);
 		}
-		return $this->name;
+		return $name;
 	}
 }
 ?>

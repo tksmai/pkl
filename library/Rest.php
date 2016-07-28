@@ -5,9 +5,9 @@
  */
 abstract class Rest extends Yaf_Controller_Abstract {
 	protected $_post_data;
-	public function init()
+	protected function init()
 	{
-		$this->_post_data = json_decode(file_get_contents('php://input'));
+		$this->_post_data = json_decode(file_get_contents('php://input'), true);
 	}
 
 	protected function respone(array $data, int $http_code = null, array $option = null)
