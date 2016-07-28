@@ -1,9 +1,21 @@
 <?php
-class UserModel
+class UserModel extends Model
 {
-	public function hello()
+	private $user_info = [];
+
+	public function checkAccount(string $account)
 	{
-		echo 'Hello UserModel';
+		$option = [
+			'where' => [
+				'AND' => [
+					'account' => $account,
+					'status' => '1'
+				]
+			]
+		];
+		$user_info = $this->select($option);
+		var_dump($this->last_query());
+		var_dump($user_info);
 	}
 }
 ?>
