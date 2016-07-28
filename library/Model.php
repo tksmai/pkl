@@ -14,7 +14,7 @@ class Model{
 		}
 
 		if ( $this->name ) {
-			$this->db = \service::getInstance()->fetch('dbo');
+			$this->db = \Service::getInstance()->fetch('dbo');
 			$this->table_prefix = Yaf_Application::app()->getConfig()->db->prefix;
 		}
 	}
