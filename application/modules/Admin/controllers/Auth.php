@@ -1,5 +1,5 @@
 <?php
-class AuthController extends Rest{
+class AuthController extends \Rest{
 	protected $_model;
 	protected function init()
 	{
@@ -26,38 +26,23 @@ class AuthController extends Rest{
 
 	protected function error_respone(string $error)
 	{
-		switch ($error) {
-			case 'param_undefined':
-				$err_msg = '请求错误！';
-				$code = 400;
-				break;
-			case 'param_error':
-				$err_msg = '参数错误！';
-				$code = 422;
-				break;
-			case 'account_not_exist':
-				$err_msg = '账号不存在！';
-				$code = 404;
-				break;
-			case 'account_forbid':
-				$err_msg = '账号已禁用！';
-				$code = 403;
-				break;
-			case 'password_error':
-				$err_msg = '密码错误！';
-				$code = 401;
-				break;
-			case 'token_error':
-				$err_msg = '请登录！';
-				$code = 401;
-				break;
-			case 'server_error':
-				$err_msg = '服务端出现错误！';
-				$code = 500;
-				break;
+		static $_e = [
+			'param_undefined' => [400, '请求错误！'],
+			'param_error' => [422, '参数错误！'],
+			'account_not_exist' => [404, '账号不存在！'],
+			'account_forbid' => [403, '账号已禁用！'],
+			'password_error' => [401, '密码错误！'],
+			'token_error' => [401, '请登录！'],
+			'token_time_out' => [401, '认证超时，请重新登录！'],
+			'server_error' => [500, '服务端出现错误！'],
+		];
+		if ( isset($_e[$error]) ) {
+			$err_msg = urlencode($_e[$error][1]);
+			header("info:{$err_msg}");
+			$data = ['error' => $_e[$error][1]];
+			$this->respone($data, $_e[$error][0]);
 		}
-		$data = ['error' => $err_msg];
-		$this->respone($data, $code);
+		
 	}
 }
 ?>
