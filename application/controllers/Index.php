@@ -5,7 +5,7 @@
  * @desc 默认控制器
  * @see http://www.php.net/manual/en/class.yaf-controller-abstract.php
  */
-class IndexController extends AdminController {
+class IndexController extends Yaf\Controller_Abstract {
 
 	/** 
      * 默认动作
