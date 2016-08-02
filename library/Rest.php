@@ -3,25 +3,20 @@
  * @name rest
  * @author Tsukasa Yukinoshita
  */
-abstract class Rest extends Yaf_Controller_Abstract {
+abstract class Rest extends Yaf\Controller_Abstract {
 	protected $_post_data;
 	protected function init()
 	{
 		$this->_post_data = json_decode(file_get_contents('php://input'), true);
 	}
 
-	protected function respone(array $data, int $http_code = null, array $option = null)
+	protected function respone($data, $http_code = 200)
 	{
-		// @$json_option = (int)$option['json_option'] ?? 0;
-		// @$json_depth = (int)$option['json_depth'] ?? 512;
-		$http_code = $http_code ?? 200;
-		$status_text = (string)$option['status_text'] ?? null;
 		header('Content-Type:application/json; charset=utf-8');
 		$this->sendHttpStatus($http_code, $status_text);
-		// exit(json_encode($data, $json_option, $json_depth));
 		exit(json_encode($data));
 	}
-	protected function sendHttpStatus(int $code, string $custom_text = null) {
+	protected function sendHttpStatus(int $code) {
 		static $_status = array(
 			// Informational 1xx
 			100 => 'Continue',
@@ -71,11 +66,10 @@ abstract class Rest extends Yaf_Controller_Abstract {
 			505 => 'HTTP Version Not Supported',
 			509 => 'Bandwidth Limit Exceeded'
 		);
-		$custom_text = $custom_text ?? $_status[$code];
 		if(isset($_status[$code])) {
-			header('HTTP/1.1 '.$code.' '.$custom_text);
+			header('HTTP/1.1 '.$code.' '.$_status[$code]);
 			// 确保FastCGI模式下正常
-			header('Status:'.$code.' '.$custom_text);
+			header('Status:'.$code.' '.$_status[$code]);
 		}
 	}
 }
