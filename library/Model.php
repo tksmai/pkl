@@ -11,7 +11,7 @@ class Model{
 		} else {
 			$this->table_name = $this->getModelName();
 		}
-		// $this->table_name = 
+		$this->table_name = $this->parse_name($this->table_name);
 		if ( $this->table_name ) {
 			$this->db = \Service::getInstance()->fetch('dbo');
 			$this->table_prefix = Yaf_Application::app()->getConfig()->db->prefix;
@@ -47,6 +47,13 @@ class Model{
 			$name = substr($name, $pos+1);
 		}
 		return $name;
+	}
+	final private function parse_name($name, $type=0) {
+		if ($type) {
+			return ucfirst(preg_replace_callback('/_([a-zA-Z])/', function($match){return strtoupper($match[1]);}, $name));
+		} else {
+			return strtolower(trim(preg_replace("/[A-Z]/", "_\\0", $name), "_"));
+		}
 	}
 }
 ?>
