@@ -10,10 +10,10 @@ abstract class Rest extends Yaf\Controller_Abstract {
 		$this->_post_data = json_decode(file_get_contents('php://input'), true);
 	}
 
-	protected function respone($data, $http_code = 200)
+	protected function response($data, $http_code = 200)
 	{
 		header('Content-Type:application/json; charset=utf-8');
-		$this->sendHttpStatus($http_code, $status_text);
+		$this->sendHttpStatus($http_code);
 		exit(json_encode($data));
 	}
 	protected function sendHttpStatus(int $code) {
