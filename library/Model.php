@@ -4,6 +4,7 @@ class Model{
 	protected $table_name;
 	protected $table_prefix;
 	protected $table_fullname;
+	protected $err_msg;
 	// protected $name;
 	public function __construct(string $name = null){
 		if ( $name ) {
@@ -14,7 +15,7 @@ class Model{
 		$this->table_name = $this->parse_name($this->table_name);
 		if ( $this->table_name ) {
 			$this->db = \Service::getInstance()->fetch('dbo');
-			$this->table_prefix = Yaf_Application::app()->getConfig()->db->prefix;
+			$this->table_prefix = \Yaf\Application::app()->getConfig()->db->prefix;
 		}
 		$this->table_fullname = "{$this->table_prefix}{$this->table_name}";
 	}
@@ -54,6 +55,12 @@ class Model{
 		} else {
 			return strtolower(trim(preg_replace("/[A-Z]/", "_\\0", $name), "_"));
 		}
+	}
+
+	final public function getErrorMsg()
+	{
+		$err_msg = $this->err_msg;
+		return $err_msg;
 	}
 }
 ?>
