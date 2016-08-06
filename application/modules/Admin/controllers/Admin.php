@@ -91,5 +91,20 @@ class AdminController extends \Rest {
 		], 0);
 	}
 
+	final protected function list_response($data = false, $page = true)
+	{
+		if ( $data ) {
+			if ( $page ) {
+				// 一般地，获取list是用GET方法获取
+				$p = $this->_p ? $this->_p : I('get.p', '1');
+				$listRows = $this->_listRows ? $this->_listRows : I('get.listRows', '15');
+				header("p:{$p}");
+				header("listRows:{$listRows}");
+			}
+			$this->response($data, 200);
+		} else {
+			$this->tips_respone('resource_not_found');
+		}
+	}
 }
 ?>
